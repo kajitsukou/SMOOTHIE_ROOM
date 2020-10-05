@@ -15,3 +15,16 @@
 <div class="row">
 	<%= link_to '編集する', edit_user_path(@user), class: "btn btn-primary" %>
 </div>
+
+<h2>マイ投稿レシピ一覧</h2>
+
+<table class="table table-hover">
+
+		<% @recipes.each do |recipe| %>
+		<%= link_to recipe_path(recipe.id) do %>
+					<%= attachment_image_tag recipe, :smoothie_image, size: "180x130" %>
+				<% end %>
+
+		<%= link_to recipe.title, recipe_path(recipe) %>
+		<% end %>
+</table>

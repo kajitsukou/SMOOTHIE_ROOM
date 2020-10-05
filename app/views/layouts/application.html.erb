@@ -21,6 +21,7 @@
             <% if user_signed_in? %>
               <li><%= link_to ' レシピ一覧', recipes_path, class: 'glyphicon glyphicon-cutlery recipes' %></li>
               <li><%= link_to ' レシピ投稿', new_recipe_path, class: 'glyphicon glyphicon-tag recipes' %></li>
+              <li><%= link_to ' マイページ', user_path(current_user.id), class: 'glyphicon glyphicon-home users' %></li>
               <li><%= link_to ' user一覧', users_path, class: 'glyphicon glyphicon-user users' %></li>
               <li><%= link_to ' ログアウト', destroy_user_session_path, method: :delete, class: 'glyphicon glyphicon-log-out logout' %></li>
             <% else %>
@@ -40,7 +41,9 @@
       <%= yield %>
     </div>
 
-      <footer>
+  </body>
+
+  <footer>
         <div class="container">
           <div class="row">
             <div class="col-xs-3 col-xs-offset-9">
@@ -49,6 +52,4 @@
           </div>
         </div>
       </footer>
-
-  </body>
 </html>
