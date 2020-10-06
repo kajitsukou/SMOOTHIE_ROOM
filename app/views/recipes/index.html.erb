@@ -1,5 +1,15 @@
 <div class="container">
+
+	<div class="row">
+
 	<h2>レシピ一覧</h2>
+	<div class="pull-right">
+	<%= search_form_for @search do |f| %>
+    <%= f.search_field :title_cont %>
+    <%= f.submit %>
+    <% end %>
+    </div>
+    </div>
 
 	<div class="smoothie-index">
 		<% @recipes.each do |recipe| %>
@@ -30,6 +40,10 @@
 
 			</div>
 		<% end %>
+		<div class="center-block">
+		<%= paginate @recipes %>
+	</div>
+
 
 	</div>
 </div>
