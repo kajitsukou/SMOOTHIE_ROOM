@@ -2,7 +2,9 @@ class RecipesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-  	@recipes = Recipe.all
+  	#@recipes = Recipe.page(params[:page]).reverse_order
+    @search = Recipe.ransack(params[:q])
+    @recipes = @search.result.page(params[:page]).reverse_order
   end
 
   def show
