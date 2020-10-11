@@ -9,6 +9,7 @@ class UsersController < ApplicationController
   def show
   	@user = User.find(params[:id])
     @recipes = @user.recipes
+    @my_recipes = Recipe.page(params[:page]).per(9)
   end
 
   def edit
