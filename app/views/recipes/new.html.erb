@@ -1,10 +1,11 @@
 <div class="container">
-	<%= form_for(@recipe) do |f| %>
-		<div class="row">
+	<h3>recipe投稿</h3>
 
+	<div class="row">
+		<%= form_for(@recipe) do |f| %>
 		  	<div class="col-xs-5">
 			    <div class="field row">
-					<%= f.label :スムージ画像 %>
+					<%= f.label :画像 %>
 					<%= f.attachment_field :smoothie_image %>
 				</div>
 			</div>
@@ -34,6 +35,6 @@
 					<%= f.submit '投稿する', class: "btn btn-primary col-xs-12" %>
 				</div>
 			</div>
-	    </div>
-	<% end %>
+		<% end %>
+	</div>
 </div>

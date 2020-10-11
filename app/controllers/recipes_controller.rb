@@ -1,8 +1,7 @@
 class RecipesController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: :index
 
   def index
-  	#@recipes = Recipe.page(params[:page]).reverse_order
     @search = Recipe.ransack(params[:q])
     @recipes = @search.result.page(params[:page]).reverse_order
   end

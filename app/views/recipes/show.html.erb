@@ -1,81 +1,86 @@
 <div class="container">
 	<h3>レシピ詳細</h3>
 	<div class = "row">
-	<div class="col-xs-5">
-		<%= attachment_image_tag @recipe, :smoothie_image, size: "400x470" %>
+		<div class="col-xs-5">
+			<%= attachment_image_tag @recipe, :smoothie_image, size: "400x470" %>
+		</div>
+
+		<div class="col-xs-7">
+			<table class="table table-hover table-inverse">
+					<p><tr>
+						<h3><%= @recipe.title %></h3><br>
+					</tr></p>
+
+					<p><tr>
+						<h3><%= @recipe.catchphrase %></h3>
+					</tr></p>
+
+					<tr>
+						<th>材料</th>
+						<td><%= @recipe.ingredient %></td>
+					</tr>
+
+					<tr>
+						<th>作り方</th>
+						<td><%= @recipe.method %></td>
+					</tr>
+
+					<tr>
+						<th>作成者</th>
+						<td><%= link_to @recipe.user.name, user_path(@recipe.user.id) %></td>
+					</tr>
+			</table>
+
+			<% if current_user == @recipe.user %>
+				<%= link_to "レシピを編集する", edit_recipe_path(@recipe), class: "btn-sm btn-success" %>
+				<%= link_to "レシピを消す", recipe_path(@recipe), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn-sm btn-danger destroy_book_#{@recipe.id}" %>
+			<% end %>
+		</div>
 	</div>
 
-	<div class="col-xs-7">
-		<table class="table table-hover table-inverse">
-				<tr>
-					<h3><%= @recipe.title %></h3>
-				</tr>
-
-				<tr>
-					<th>レシピ紹介</th>
-					<td><%= @recipe.catchphrase %></td>
-				</tr>
-
-				<tr>
-					<th>材料</th>
-					<td><%= @recipe.ingredient %></td>
-				</tr>
-
-				<tr>
-					<th>作り方</th>
-					<td><%= @recipe.method %></td>
-				</tr>
-		</table>
-		
-
-		<% if current_user == @recipe.user %>
-		<%= link_to "レシピを編集する", edit_recipe_path(@recipe), class: "btn-sm btn-success" %>
-		<%= link_to "レシピを消す", recipe_path(@recipe), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn-sm btn-danger destroy_book_#{@recipe.id}" %>
-		<% end %></div>
-
-		<!-- いいね機能 -->
-          <div class = "row">
-          	<div class="col-xs-12">
-
-            <h4><% if @recipe.favorited_by?(current_user) %>
-              いいね数：<%= link_to recipe_favorites_path(@recipe), method: :delete do %>
-                <span class="glyphicon glyphicon-heart"><%= @recipe.favorites.count%></span>
-              <% end %>
-            <% else %>
-              いいね数：<%= link_to recipe_favorites_path(@recipe), method: :post do %>
-                <span class="glyphicon glyphicon-heart-empty"><%= @recipe.favorites.count %></span>
-              <% end %>
-            <% end %>
-          
-					<!-- いいね機能 -->
-
-		<!-- コメント一覧 -->
-		コメント数：<%= @recipe.recipe_comments.count %></h4></div>
+    <div class = "row">
+        <div class="col-xs-12">
+            <h4>
+            	<% if @recipe.favorited_by?(current_user) %>
+                	いいね数：<%= link_to recipe_favorites_path(@recipe), method: :delete do %>
+                		<span class="glyphicon glyphicon-heart"><%= @recipe.favorites.count%></span>
+              		<% end %>
+           		 <% else %>
+             		いいね数：<%= link_to recipe_favorites_path(@recipe), method: :post do %>
+               			<span class="glyphicon glyphicon-heart-empty"><%= @recipe.favorites.count %></span>
+              		<% end %>
+           		 <% end %>
+				コメント数：<%= @recipe.recipe_comments.count %>
+			</h4>
+		</div>
 	</div>
-		<table>
-	        <% @recipe_comments.each do |recipe_comment| %>
-	            <tr>
-	              <td class="show-comment">
+
+	<table>
+	    <% @recipe_comments.each do |recipe_comment| %>
+            <tr>
+            	<td class="show-comment">
 	                <%= link_to user_path(recipe_comment.user), class: "user_#{recipe_comment.user.id}" do %>
-	                <%= recipe_comment.user.name %>
+	                	<%= recipe_comment.user.name %>
 	                <% end %>
-	              </td>
+	            </td>
 
-	              <td class="show-comment"><%= recipe_comment.comment %></td>
-	              <% if current_user == recipe_comment.user %>
-	                <td><%= link_to 'コメントを削除する', recipe_recipe_comment_path(@recipe, recipe_comment), class: 'btn-sm btn-danger', method: :delete %></td>
-	              <% end %>
-	            </tr>
-	        <% end %>
-        </table>
+	            <td class="show-comment">
+	            	<%= recipe_comment.comment %>
+	            </td>
 
-	    <div class="comment-form">
-	      <%= form_for [@recipe, @recipe_comment] do |f| %>
-	        <%= f.text_area :comment, size: "90x5" %>
+	            <% if current_user == recipe_comment.user %>
+	            	<td>
+	            		<%= link_to 'コメントを削除する', recipe_recipe_comment_path(@recipe, recipe_comment), class: 'btn-sm btn-danger', method: :delete %>
+	            	</td>
+	            <% end %>
+	        </tr>
+	    <% end %>
+	</table>
+
+	<div class="comment-form">
+		<%= form_for [@recipe, @recipe_comment] do |f| %>
+			<%= f.text_area :comment, size: "90x5" %>
 	        <%= f.submit '送信', class: "btn-sm btn-primary" %>
-	      <% end %>
-	    </div>
-
-    <!-- コメント一覧 -->
+	    <% end %>
 	</div>
 </div>

@@ -1,3 +1,31 @@
 // Place all the styles related to the recipes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.smoothie-index {
+  display: flex;
+  flex-wrap:wrap
+}
+
+.smoothie-box {
+  position: relative;
+  margin: 20px;
+  padding: 0;
+  }
+
+.smoothie-box p {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin: 0px;
+  color: white;
+  background: silver;
+  font-size: 13px;
+  line-height: 1;
+  padding: 5px 10px;
+  }
+
+ul {
+  list-style: none;
+}
+
