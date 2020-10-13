@@ -21,7 +21,7 @@ class RecipesController < ApplicationController
   	@recipe = Recipe.new(recipe_params)
     @recipe.user_id = current_user.id
   	  if @recipe.save
-        redirect_to recipe_path(@recipe), notice: "You have created book successfully."
+        redirect_to recipe_path(@recipe), notice: "レシピを投稿しました"
       else
         @recipes = Recipe.all
         render 'new'
@@ -38,7 +38,7 @@ class RecipesController < ApplicationController
   def update
     @recipe = Recipe.find(params[:id])
     if @recipe.update(recipe_params)
-      redirect_to recipe_path(@recipe), notice: "You have updated book successfully."
+      redirect_to recipe_path(@recipe), notice: "レシピを編集しました"
     else
       render "edit"
     end
