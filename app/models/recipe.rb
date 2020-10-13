@@ -5,7 +5,7 @@ class Recipe < ApplicationRecord
 
 	attachment :smoothie_image, destroy: false
 
-	validates :title, :catchphrase, :ingredient, :method, presence: true
+	validates :title, :catchphrase, :ingredient, :method, :smoothie_image, presence: true
 
 	def favorited_by?(user)
 	favorites.where(user_id: user.id).exists?
