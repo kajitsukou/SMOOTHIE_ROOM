@@ -1,0 +1,41 @@
+<%= form_for(recipe) do |f| %>
+	<% if recipe.errors.any? %>
+	<%= recipe.errors.count %>error
+	<% recipe.errors.full_messages.each do |message| %>
+	<%= message %>
+	<% end %>
+	<% end %>
+
+  	<div class="col-xs-5">
+	    <div class="field row">
+			<%= f.label :画像 %>
+			<%= f.attachment_field :smoothie_image %>
+		</div>
+	</div>
+
+	<div class="col-xs-7">
+		<div class="field row">
+			<%= f.label :レシピ名 %>
+			<%= f.text_field :title, class: "col-xs-12 recipe_title" %>
+		</div>
+
+		<div class="field row">
+			<%= f.label :レシピ紹介 %>
+			<%= f.text_area :catchphrase, class: "col-xs-12 recipe_catchphrase" %>
+		</div>
+
+		<div class="field row">
+			<%= f.label :材料 %>
+			<%= f.text_area :ingredient, class: "col-xs-12 recipe_ingredient" %>
+		</div>
+
+		<div class="field row">
+			<%= f.label :作り方 %>
+			<%= f.text_area :method, class: "col-xs-12 recipe_method" %>
+		</div>
+
+		<div class="actions row">
+			<%= f.submit '投稿する', class: "btn btn-primary col-xs-12" %>
+		</div>
+	</div>
+<% end %>

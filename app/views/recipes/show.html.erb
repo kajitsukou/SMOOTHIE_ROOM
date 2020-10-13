@@ -55,32 +55,34 @@
 		</div>
 	</div>
 
-	<table>
-	    <% @recipe_comments.each do |recipe_comment| %>
-            <tr>
-            	<td class="show-comment">
-	                <%= link_to user_path(recipe_comment.user), class: "user_#{recipe_comment.user.id}" do %>
-	                	<%= recipe_comment.user.name %>
-	                <% end %>
-	            </td>
-
-	            <td class="show-comment">
-	            	<%= recipe_comment.comment %>
-	            </td>
-
-	            <% if current_user == recipe_comment.user %>
-	            	<td>
-	            		<%= link_to 'コメントを削除する', recipe_recipe_comment_path(@recipe, recipe_comment), class: 'btn-sm btn-danger', method: :delete %>
-	            	</td>
-	            <% end %>
-	        </tr>
-	    <% end %>
-	</table>
+	<div class="col-xs-12">
 
 	<div class="comment-form">
+		<p>コメントする</p>
 		<%= form_for [@recipe, @recipe_comment] do |f| %>
 			<%= f.text_area :comment, size: "90x5" %>
 	        <%= f.submit '送信', class: "btn-sm btn-primary" %>
 	    <% end %>
 	</div>
+
+	<table>
+	    <% @recipe_comments.each do |recipe_comment| %>
+            <tr>
+            	<td class="show-comment">
+            		<p>ユーザー名：
+            			<%= link_to user_path(recipe_comment.user), class: "user_#{recipe_comment.user.id}" do %>
+	                		<%= recipe_comment.user.name %>
+	                    <% end %>
+
+	                    <% if current_user == recipe_comment.user %>
+	            			<%= link_to 'コメントを削除する', recipe_recipe_comment_path(@recipe, recipe_comment), class: 'btn-sm btn-danger', method: :delete %>
+	         			<% end %>
+	                </p>
+	            	<p>コメント：<%= recipe_comment.comment %></p>
+	            </td>
+	        </tr>
+	    <% end %>
+	</table>
+</div>
+
 </div>

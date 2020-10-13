@@ -6,7 +6,7 @@ class RecipeCommentsController < ApplicationController
       @recipe_comment = current_user.recipe_comments.new(recipe_comment_params)
       @recipe_comment.recipe_id = @recipe.id
       if @recipe_comment.save
-        flash[:success] = "Comment was successfully created."
+        flash[:success] = "コメントを投稿しました."
       end
       redirect_to request.referer
     end
