@@ -32,9 +32,9 @@
 					<li>
 						<div class="my-smoothie-box">
 							<%= link_to recipe_path(recipe.id) do %>
-								<%= attachment_image_tag recipe, :smoothie_image, size: "160x160" %><%= recipe.title %>
+								<%= attachment_image_tag recipe, :smoothie_image, size: "160x160" %>
 							<% end %>
-							<p></p>
+							<p><%= recipe.title %></p>
 						</div>
 					</li>
 				</ul>
